@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+template <class E>
+E maximum(vector<E> v){
+
+  /*Base case is if the size of vector is 1 return the only element inside the vector*/
+	if(v.size()==1)
+		return v[0];
+    
+  /*Swapping elements with compare*/
+	if(v[v.size()-1] > v[v.size()-2]){
+		E temp = v[v.size()-1];
+		v[v.size()-1] = v[v.size()-2];
+		v[v.size()-2] = temp;
+	}
+  
+  /*After swapping popping the last element of the vector which is not the greatest element*/
+	v.pop_back();
+  
+  /*Recalling maximum function for the rest of vector*/
+	return maximum(v);
+}
+
+int main(){
+	vector<int> vec;
+  
+  /* Filling vector with numbers 0 to 9 */
+	for(int i=0;i<10;i++){
+		vec.push_back(i);
+	}
+  /*Adding 2 and 4 for break the order of vector*/
+	vec.push_back(2);
+	vec.push_back(4);
+  
+  /*Printing return value of maximum function*/
+	cout << maximum(vec) << endl;
+}
